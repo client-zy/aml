@@ -1,0 +1,31 @@
+<!doctype html>
+<html ng-app="myApp">
+<head>
+  <title>个人信息</title>
+  <link rel="stylesheet" type="text/css" 
+      href="/static/css/styles.css" />
+</head>
+<body>
+  <div class="form-container" ng-controller="myController">
+    <p class="form-header">个人信息</p>
+    <form method="POST" action="/user/update">
+       <label>用户名:</label>
+         <input type="text" name="username" 
+                ng-model="user.username" disabled><br>
+       <label>Email:</label>
+         <input type="email" name="email" 
+                ng-model="user.email"><br>
+       <label>最喜欢的颜色:</label>
+         <input type="text" name="color" 
+                ng-model="user.color"><br>
+       <input type="submit" value="保存">
+    </form>       
+  </div>
+  <form method="POST" action="/user/delete">
+    <input type="submit" value="删除用户">
+  </form>
+  <hr><%= msg %>
+  <script src="http://code.angularjs.org/1.2.9/angular.min.js"></script>
+  <script src="/static/js/my_app.js"></script>
+</body>
+</html>
