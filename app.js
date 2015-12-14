@@ -1,48 +1,51 @@
-var express = require('express'),
-  routes = require('./routes'),
-  http = require('http'),
-  path = require('path'),
-  mongoskin = require('mongoskin'),
+var express = require('express'),//导入'Express.js'Web框架
+  routes = require('./routes'),//路由
+  http = require('http'),//Node.js的http核心模块
+  path = require('path'),//用来处理系统路径
+  mongoskin = require('mongoskin'),//数据库驱动
   dbUrl = process.env.MONGOHQ_URL || 'mongodb://@localhost:27017/blog',
   db = mongoskin.db(dbUrl, {safe: true}),
-  collections = {
+  collections = {//数据集合
     articles: db.collection('articles'),
     users: db.collection('users')
   };
 
-var session = require('express-session'),
-  logger = require('morgan'),
+var session = require('express-session'),//session
+  logger = require('morgan'),//日志
   errorHandler = require('errorhandler'),
-  cookieParser = require('cookie-parser'),
-  bodyParser = require('body-parser'),
+  cookieParser = require('cookie-parser'),//解析HTTP请求的cookie数据(req.cookie)
+  bodyParser = require('body-parser'),//解析HTTP请求的body数据(req.body)
   methodOverride = require('method-override');
 
-var app = express();
-app.locals.appTitle = 'blog-express';
+var app = express();//实例化一个对象
+app.locals.appTitle = '我的博客';
 
+// 自定义中间件
 app.use(function(req, res, next) {
-  if (!collections.articles || ! collections.users) return next(new Error("No collections."))
+  if (!collections.articles || ! collections.users) return next(new Error("无数据库连接!"))
   req.collections = collections;
   return next();
 });
 
-app.set('port', process.env.PORT || 3000);
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+// 配置Express.js
+app.set('port', process.env.PORT || 3000);//端口
+app.set('views', path.join(__dirname, 'views'));//模板路径
+app.set('view engine', 'jade');//模板引擎
 
-app.use(logger('dev'));
+// 第三方的模块定义的中间件
+app.use(logger('dev'));//会在终端中不停地对每个请求输入日志
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(methodOverride());
 app.use(require('stylus').middleware(__dirname + '/public'));
 app.use(express.static(path.join(__dirname, 'public')));
 
-// development only
+// 只在开发者模式下，触发错误日志
 if ('development' == app.get('env')) {
   app.use(errorHandler());
 }
 
-// Pages and routes
+// 网页和路由
 app.get('/', routes.index);
 app.get('/login', routes.user.login);
 app.post('/login', routes.user.authenticate);
