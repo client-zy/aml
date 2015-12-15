@@ -1,14 +1,14 @@
 .menu
   ul.nav.nav-pills
     li(class=(menu === 'index')?'active':'')
-      a(href='/') Home
+      a(href='/') 首页
     if (admin || menu ==='admin' || menu==='post')
       li(class=(menu === 'post')?'active':'')
-        a(href="/post") Post
+        a(href="/post") 编辑文章
       li(class=(menu === 'admin')?'active':'')
-        a(href="/admin") Admin
+        a(href="/admin") 管理员
       li
-        a(href="/logout") Log out
+        a(href="/logout") 登出
     else
       li(class=(menu === 'login')?'active':'')
-        a(href='/login') Log in
+        a(href='/login') 登录

@@ -4,9 +4,9 @@ block page
   - var menu = 'index'
 block content
   if (articles.length === 0)
-    | There's no published content yet. 
-    a(href="/login") Log in
-    |  to post and publish.
+    | 还没有发表过文章
+    a(href="/login") 登录
+    |  去发表文章.
   else 
     each article, index in articles
       div
