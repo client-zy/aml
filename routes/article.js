@@ -1,8 +1,6 @@
-
 /*
- * GET article page.
+ * GET 文章详情页面.
  */
-
 exports.show = function(req, res, next) {
   if (!req.params.slug) return next(new Error('No article slug.'));
   req.collections.articles.findOne({slug: req.params.slug}, function(error, article) {
@@ -12,11 +10,9 @@ exports.show = function(req, res, next) {
   });
 };
 
-
 /*
  * GET articles API.
  */
-
 exports.list = function(req, res, next) {
   req.collections.articles.find({}).toArray(function(error, articles) {
     if (error) return next(error);
@@ -24,11 +20,9 @@ exports.list = function(req, res, next) {
   });
 };
 
-
 /*
  * POST article API.
  */
-
 exports.add = function(req, res, next) {
   if (!req.body.article) return next(new Error('No article payload.'));
   var article = req.body.article;
@@ -39,11 +33,9 @@ exports.add = function(req, res, next) {
   });
 };
 
-
 /*
  * PUT article API.
  */
-
 exports.edit = function(req, res, next) {
   if (!req.params.id) return next(new Error('No article ID.'));
   req.collections.articles.updateById(req.params.id, {$set: req.body.article}, function(error, count) {
@@ -55,7 +47,6 @@ exports.edit = function(req, res, next) {
 /*
  * DELETE article API.
  */
-
 exports.del = function(req, res, next) {
   if (!req.params.id) return next(new Error('No article ID.'));
   req.collections.articles.removeById(req.params.id, function(error, count) {
@@ -64,22 +55,17 @@ exports.del = function(req, res, next) {
   });
 };
 
-
 /*
  * GET article POST page.
  */
-
 exports.post = function(req, res, next) {
   if (!req.body.title)
   res.render('post');
 };
 
-
-
 /*
  * POST article POST page.
  */
-
 exports.postArticle = function(req, res, next) {
   if (!req.body.title || !req.body.slug || !req.body.text ) {
     return res.render('post', {error: 'Fill title, slug and text.'});
@@ -96,16 +82,12 @@ exports.postArticle = function(req, res, next) {
   });
 };
 
-
-
 /*
  * GET admin page.
  */
-
 exports.admin = function(req, res, next) {
   req.collections.articles.find({},{sort: {_id:-1}}).toArray(function(error, articles) {
     if (error) return next(error);
     res.render('admin',{articles:articles});
   });
-
 }
