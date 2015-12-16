@@ -5,16 +5,15 @@ block content
   div.admin  
     if (articles.length === 0 )
       p
-        | Nothing to display. Add a new 
-        a(href="/post") article
-        |.
+        | 还没写过文章，点击
+        a(href="/post") 编辑文章
+        | 进入去发表文章.
     else
-      
       table.table.table-stripped
         thead
           tr
-            th(colspan="2") Actions
-            th Post Title
+            th(colspan="2") 操作
+            th 文章标题
         tbody
           each article, index in articles
             tr(data-id="#{article._id}", class=(!article.published)?'unpublished':'')

@@ -83,11 +83,11 @@ exports.postArticle = function(req, res, next) {
 };
 
 /*
- * GET admin page.
+ * GET 后台用户界面.
  */
 exports.admin = function(req, res, next) {
   req.collections.articles.find({},{sort: {_id:-1}}).toArray(function(error, articles) {
     if (error) return next(error);
-    res.render('admin',{articles:articles});
+    res.render('admin',{articles:articles});//呈现一个页面给客户端
   });
 }
