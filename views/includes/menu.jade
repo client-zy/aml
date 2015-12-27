@@ -2,11 +2,13 @@
   ul.nav.nav-pills
     li(class=(menu === 'index')?'active':'')
       a(href='/') 首页
-    if (admin || menu ==='admin' || menu==='post')
+    if (admin || menu ==='admin' || menu==='post' || menu==='chat')
       li(class=(menu === 'post')?'active':'')
         a(href="/post") 编辑文章
       li(class=(menu === 'admin')?'active':'')
         a(href="/admin") 管理员
+      li(class=(menu === 'chat')?'active':'')
+        a(href="/chat") 聊天
       li
         a(href="/logout") 登出
     else
