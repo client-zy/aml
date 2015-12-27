@@ -2,20 +2,19 @@ extends layout
 block page
   - var menu = 'post'
 block content
-  
-    h2 Post an Article
+    h2 发布文章
     div= error
     div.col-md-8
       form(action="/post", method="POST", role="form")
         div.form-group
-          label(for="title") Title
-          input#title.form-control(name="title", type="text", placeholder="JavaScript is good")
+          label(for="title") 标题
+          input#title.form-control(name="title", type="text", placeholder="Node.js简介")
         div.form-group
-          label(for="slug") Slug
-          input#slug.form-control(name="slug", type="text", placeholder="js-good")
-          span.help-block This string will be used in the URL.
+          label(for="slug") URL路由
+          input#slug.form-control(name="slug", type="text", placeholder="nodejs")
+          span.help-block 这个字符串将会成为URL一部分.
         div.form-group
-          label(for="text") Text
-          textarea#text.form-control(rows="5", name="text", placeholder="Text")
+          label(for="text") 正文
+          textarea#text.form-control(rows="5", name="text", placeholder="Node.js是一个基于googleChomeV8...")
         p
-          button.btn.btn-primary(type="submit") Save
+          button.btn.btn-primary(type="submit") 保存
