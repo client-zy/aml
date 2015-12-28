@@ -1,5 +1,6 @@
 exports.article = require('./article');
 exports.user = require('./user');
+exports.chat = require('./chat');
 
 /**
  * GET 首页

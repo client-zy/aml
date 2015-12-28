@@ -1,0 +1,44 @@
+// Created by lijian on 2015/12/28.
+doctype html
+html
+    head
+        meta(charset="utf-8")
+        meta(name="format-detection", content="telephone=no")
+        meta(name="format-detection", content="email=no")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0")
+        title= "多人聊天室"
+        link(rel='stylesheet', type='text/css', href='/css/chat/style.css')
+        <!--[if lt IE 8]><script src="/js/json3.min.js"></script><![endif]-->
+        script(type="text/javascript", src="/js/socket.io/socket.io.js")
+    body
+        #loginbox
+            div(style="width:260px;margin:200px auto;") 请先输入你在聊天室的昵称
+                br
+                br
+                input#username(name="username", type="text", placeholder="请输入用户名", style="width:180px;")
+                input(type="button", value="提交", style="width:50px;", onclick="CHAT.usernameSubmit();")
+        #chatbox(style="display:none;")
+            div(style="background:#3d3d3d;height: 28px; width: 100%;font-size:12px;")
+            div(style="line-height: 28px;color:#fff;")
+                span(style="text-align:left;margin-left:10px;") Websocket多人聊天室
+                span(style="float:right; margin-right:10px;")
+                    span#showusername |
+                    a(href="javascript:;", onclick="CHAT.logout()", style="color:#fff;") 退出
+            #doc
+                #chat
+                div#message.message
+                    div#onlinecount(style="background:#EFEFF4; font-size:12px; margin-top:10px; margin-left:10px; color:#666;")
+                #input-box
+                    div.input
+                        input#content(name="content", type="text", maxlength="140", placeholder="请输入聊天内容，按Ctrl提交")
+                    div.action
+                        button#mjr_send(type="button", onclick="CHAT.submit();") 提交
+
+                    div(style="font-size: 12px;float:left;position: absolute;width:100%;top:45px;left:10px")
+                        p 如果这个Demo对你有帮助，
+                            a(href="https://github.com/plhwin", target="_blank") 请到Github关注我
+                        p 教程：
+                            a(href="http://www.plhwin.com/2014/05/28/nodejs-socketio/", target="_blank") http://www.plhwin.com/2014/05/28/nodejs-socketio/
+                        p 源码：
+                            a(href="https://github.com/plhwin/nodejs-socketio-chat", target="_blank") https://github.com/plhwin/nodejs-socketio-chat
+        script(type="text/javascript", src="/js/chat/client.js")

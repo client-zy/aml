@@ -98,6 +98,7 @@ app.get('/admin',  routes.article.admin);
 app.get('/post',  routes.article.post);
 app.post('/post', routes.article.postArticle);
 app.get('/articles/:slug', routes.article.show);
+app.get('/chat', routes.chat.login);
 
 // REST API routes
 app.get('/api/articles', routes.article.list);
